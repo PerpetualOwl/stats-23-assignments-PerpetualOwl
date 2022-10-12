@@ -29,7 +29,9 @@ var schools = [
 
 
 // Step 2: Append a new SVG circle for every object in the schools array
-
+for (var i = 0; i < numbers.length; i++) {
+    <circle cx="250" cy="25" r="25"/>
+}
 
 
 // Step 3: Define the following dynamic properties for each circle:
