@@ -26,12 +26,13 @@ var schools = [
 
 // Step 1: Append a new SVG element to HTML document with D3
 // (width = 500px, height = 500px)
-
+var SVG = d3.select("#svg");
 
 // Step 2: Append a new SVG circle for every object in the schools array
-for (var i = 0; i < numbers.length; i++) {
-    <circle cx="250" cy="25" r="25"/>
-}
+const circle = [];
+for (var i = 0; i < schools.length; i++) {
+    circle[i] = SVG.append("circle");
+};
 
 
 // Step 3: Define the following dynamic properties for each circle:
@@ -39,7 +40,32 @@ for (var i = 0; i < numbers.length; i++) {
 //   - Radius: schools with over 3500 signups should be twice as big as schools with less than 2500 signups
 //   - Colors: use a different color for each region
 //   - Border: add a border to every circle (SVG property: stroke)
-
+var lx = 0;
+var ly = 60;
+for (var i = 0; i < schools.length; i++) {
+    circle[i].style("stroke", "10");
+    if (schools[i].signups > 3500) {
+        circle[i].attr("cx", lx + 65).attr("cy", ly).attr("r", 30 * 2);
+        lx = lx + 125;
+    } else if (schools[i].signups <= 2500) {
+        circle[i].attr("cx", lx + 35).attr("cy", ly).attr("r", 30);
+        lx = lx + 65;
+    } else {
+        circle[i].attr("cx", lx + 50).attr("cy", ly).attr("r", 30 * 1.5);
+        lx = lx + 95;
+    };
+    if (lx > 400) {
+        lx = 0;
+        ly = ly + 120;
+    };
+    if (schools[i].region == "Northeast") {
+        circle[i].attr("fill", "blue");
+    } else if (schools[i].region == "Midwest") {
+        circle[i].attr("fill", "red");
+    } else if (schools[i].region == "West") {
+        circle[i].attr("fill", "green");
+    }
+};
 
 
 // PART III: Loading data
