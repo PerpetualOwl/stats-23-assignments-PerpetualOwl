@@ -108,3 +108,18 @@ text {
     text-anchor: middle;
     fill: red;
 }
+
+#tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 3px;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 100
+}
+#svg2 {
+    position: absolute;
+}
+

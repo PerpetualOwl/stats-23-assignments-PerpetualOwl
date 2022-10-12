@@ -75,19 +75,45 @@ for (var i = 0; i < schools.length; i++) {
 let numschools = 0;
 let currentcircle = 0;
 var SVG2 = d3.select("#svg2");
+var tooltip = d3.select("#tooltip");
 d3.csv("data/schools.csv", function(data) {
-    console.log(data.eu);
     if (data.eu == "TRUE") {
         numschools = numschools + 1;
-        currentcircle = SVG2.append("circle").attr("cx", parseInt(data.x)).attr("cy", parseInt(data.y));
+        currentcircle = SVG2.append("circle").attr("cx", parseInt(data.x)).attr("cy", parseInt(data.y))
+          .on("mouseover", function(d) {
+            tooltip.transition()
+              .duration(200)
+              .style("opacity", .9)
+              .style("margin-top", data.y + "px")
+              .style("margin-left", data.x + "px")
+              tooltip.html(data.school + "<br/>" + "Signups: " + data.signups)
+            })
+          .on("mouseout", function(d) {
+            tooltip.transition()
+              .duration(500)
+              .style("opacity", 0);
+            });
         if (data.signups < 500) {
             currentcircle.attr("r", 5);
         } else {
             currentcircle.attr("r", 10);
-            SVG2.append("text").text(data.school).attr("x", parseInt(data.x)).attr("y", parseInt(data.y));
+            SVG2.append("text").text(data.school).attr("x", parseInt(data.x)).attr("y", parseInt(data.y))
+                .on("mouseover", function(d) {
+                    tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9)
+                    .style("margin-top", data.y + "px")
+                    .style("margin-left", data.x + "px")
+                    tooltip.html(data.school + "<br/>" + "Signups: " + data.signups)
+                    })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+                    });
         }
     };
-    
+
     currentcircle = 0;
 });
 
