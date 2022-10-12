@@ -72,13 +72,28 @@ for (var i = 0; i < schools.length; i++) {
 
 // Step 1: Use D3 to load the CSV file "schools.csv". then, print the data
 // to the console and inspect it in your browser
+let numschools = 0;
+let currentcircle = 0;
+var SVG2 = d3.select("#svg2");
+d3.csv("data/schools.csv", function(data) {
+    console.log(data.eu);
+    if (data.eu == "TRUE") {
+        numschools = numschools + 1;
+        currentcircle = SVG2.append("circle").attr("cx", parseInt(data.x)).attr("cy", parseInt(data.y));
+        if (data.signups < 500) {
+            currentcircle.attr("r", 5);
+        } else {
+            currentcircle.attr("r", 10);
+            SVG2.append("text").text(data.school).attr("x", parseInt(data.x)).attr("y", parseInt(data.y));
+        }
+    };
+    
+    currentcircle = 0;
+});
 
 
 // Step 2: Filter the dataset: Filter the dataset to only include schools that are
 // part of the Datamatch Schools (using the datamatchSchool variable).
-
-
-
 
 // Step 3: Append a new paragraph to your HTML document that shows the
 // number of Datamatch schools

@@ -102,3 +102,9 @@ header {
 .spacer {
     height: 100px
 }
+
+text {
+	font-size: 11px;
+    text-anchor: middle;
+    fill: red;
+}
