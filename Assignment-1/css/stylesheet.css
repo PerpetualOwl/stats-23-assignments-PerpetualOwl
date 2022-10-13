@@ -9,7 +9,7 @@ body {
 }
 
 header {
-    position: absolute;
+    position: fixed;
     margin-top: -10px;
     margin-left: -10px;
     width: 100vw;
