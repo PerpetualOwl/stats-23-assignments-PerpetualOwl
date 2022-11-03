@@ -6,3 +6,8 @@ Array.from(document.getElementsByClassName("menu-item"))
       menu.dataset.activeIndex = index;
     }
   });
+
+var width = 700,
+  height = 500;
+
+  
