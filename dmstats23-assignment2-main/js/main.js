@@ -39,7 +39,7 @@ var createVisualization = function (data) {
 		.attr("margin-bottom", 50)
 		.attr("margin", 30)
 		.attr("width", width + 100)
-		.attr("height", height + 50);
+		.attr("height", height + 100);
 
 
 	// Step 3: Create linear scales by using the D3 scale functions
@@ -54,7 +54,7 @@ var createVisualization = function (data) {
 
 	streamsScale = d3.scaleLinear()
 		.domain([d3.min(data, function (d) { return d.streams_in_mils; }), d3.max(data, function (d) { return d.streams_in_mils; })])
-		.range([height, 0]);
+		.range([height, 50]);
 
 	// Step 4: Try the scale functions
 	// You can call the functions with example values and print the result to the web console.
@@ -143,25 +143,9 @@ var createVisualization = function (data) {
 	// Step 12: Color the circles depending on their genres
 	// Use a D3 color scale
 
-	var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+	var colorScale = d3.scaleOrdinal(d3.schemeCategory10); // scuffed way to do it xD
 
 	svg.selectAll("circle")
 		.attr("fill", function (d) { return colorScale(d.genre); });
-
-	svg.selectAll("circle")
-		.data(data)
-		.on("mouseover", function(d) {
-			tooltip.transition()
-			.duration(200)
-			.style("opacity", .9)
-			.style("margin-top", numSongsScale(d.songs) + "px")
-			.style("margin-left", streamsScale(d.streams_in_mils) + "px")
-			tooltip.html(d.name + "<br/>" + d.genre)
-			})
-		.on("mouseout", function(d) {
-			tooltip.transition()
-			.duration(500)
-			.style("opacity", 0);
-			});
 
 }
